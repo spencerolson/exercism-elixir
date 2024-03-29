@@ -12,10 +12,7 @@ defmodule Hamming do
 
   def hamming_distance(strand1, strand2) do
     Enum.zip(strand1, strand2)
-    |> Enum.reduce(0, &count/2)
+    |> Enum.count(fn {x, y} -> x != y end)
     |> then(&{:ok, &1})
   end
-
-  defp count({a, a}, acc), do: acc
-  defp count(_, acc), do: acc + 1
 end
