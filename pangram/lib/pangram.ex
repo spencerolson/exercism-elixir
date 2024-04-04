@@ -12,12 +12,12 @@ defmodule Pangram do
 
   """
 
-  @letters MapSet.new(?a..?z)
+  @letters  Enum.to_list(?a..?z)
 
   @spec pangram?(String.t()) :: boolean
-  def pangram?(sentence), do: missing_letters(sentence) |> Enum.empty?()
+  def pangram?(sentence), do: missing_letters(sentence) == []
 
-  defp missing_letters(sentence), do: MapSet.difference(@letters, code_points(sentence))
+  defp missing_letters(sentence), do: @letters -- code_points(sentence)
 
-  defp code_points(sentence), do: String.downcase(sentence) |> String.to_charlist() |> MapSet.new()
+  defp code_points(sentence), do: String.downcase(sentence) |> String.to_charlist()
 end
